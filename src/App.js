@@ -18,8 +18,10 @@ import {
   Card,
   Stack,
   Button,
+  Collapse,
 } from '@chakra-ui/react';
 import { ChevronUpIcon } from '@chakra-ui/icons';
+import { FaSignInAlt, FaUserPlus } from 'react-icons/fa';
 
 const theme = extendTheme({
   fonts: {
@@ -118,23 +120,30 @@ const products = [
 ];
 
 function Header() {
+  const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const toggleMobileMenu = () => {
+    setMobileMenuOpen(!isMobileMenuOpen);
+  };
+
   return (
-    <Box bg="white" p={4} color="black" boxShadow="md">
-      <Container maxW="container.lg">
-        <Flex alignItems="center">
+    <Box bg="white" p={4} boxShadow="md">
+      <Container maxW="container.xl">
+        <Flex alignItems="center" flexDirection="start">
           <Image
             src="https://upload.wikimedia.org/wikipedia/id/thumb/c/c4/Telkom_Indonesia_2013.svg/1200px-Telkom_Indonesia_2013.svg.png"
             alt="Logo Toko"
             width={{ base: '6em', md: '9em' }}
-            mr={{ base: '1em', md: '2em' }} // Margin on mobile
+            mr={{ base: '1em', md: '2em' }}
           />
-          {/* <Heading color="red" fontSize={{ base: 'lg', md: 'xl' }} ml={2}>
-            Nama Toko Anda
-          </Heading> */}
           <Spacer />
           <HStack spacing={{ base: 0, md: 4 }}>
-            {/* Show only a few links on mobile */}
-            <Link display={{ base: 'none', md: 'block' }} href="#">
+            <Link
+              display={{ base: 'none', md: 'block' }}
+              href="#"
+              color="red"
+              fontWeight="bold"
+            >
               Beranda
             </Link>
             <Link display={{ base: 'none', md: 'block' }} href="#">
@@ -146,8 +155,57 @@ function Header() {
             <Link display={{ base: 'none', md: 'block' }} href="#">
               Kontak
             </Link>
+            <Button
+              display={{ base: 'block', md: 'none' }}
+              onClick={toggleMobileMenu}
+            >
+              Menu
+            </Button>
+          </HStack>
+          <Spacer />
+          <HStack spacing={{ base: 0, md: 4 }}>
+            <Button
+              display={{ base: 'none', md: 'block' }}
+              color="black"
+              leftIcon={<FaSignInAlt style={{ color: 'black' }} />}
+              colorScheme="black"
+              variant="solid"
+              border={1}
+              shadow="md"
+            >
+              Login
+            </Button>
+            <Button
+              display={{ base: 'none', md: 'block' }}
+              leftIcon={<FaUserPlus style={{ color: 'white' }} />}
+              colorScheme="red"
+              variant="solid"
+            >
+              Register
+            </Button>
           </HStack>
         </Flex>
+        <Collapse in={isMobileMenuOpen}>
+          <Box
+            mt={4}
+            p={4}
+            bgColor="gray.100"
+            borderRadius="md"
+            boxShadow="md"
+            display={{ base: 'block', md: 'none' }}
+          >
+            <VStack spacing={2} alignItems="left">
+              <Link href="#" color="red.500">
+                Beranda
+              </Link>
+              <Link href="#">Produk</Link>
+              <Link href="#">Tentang Kami</Link>
+              <Link href="#">Kontak</Link>
+              <Link href="#">Masuk</Link>
+              <Link href="#">Register</Link>
+            </VStack>
+          </Box>
+        </Collapse>
       </Container>
     </Box>
   );
@@ -202,135 +260,135 @@ function CatalogPage() {
   return (
     <ChakraProvider theme={theme}>
       <Header />
-      <Box p={10} bg="#f5f5f5" pb={20}>
-        <div>
-          <Container maxW="80%" bg="white" borderRadius="md">
+      <div>
+        <div maxW="100%" bg="white" borderRadius="md">
+          <div
+            maxW="100%"
+            borderRadius="md"
+            style={{
+              backgroundImage: `url('https://radarlampung.disway.id/upload/891504aea3381619b7bbf4670f20b785.jpg')`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              height: '600px',
+              position: 'relative',
+            }}
+          >
             <div
-              maxW="100%"
+              style={{
+                backgroundColor: 'rgba(0, 0, 0, 0.3)',
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                width: '100%',
+                height: '100%',
+              }}
+              borderRadius="md"
+            ></div>
+            <Flex
+              alignItems="center"
+              justifyContent="center"
+              h="100%"
+              color="white"
+              textAlign="center"
+              flexDirection="column"
               borderRadius="md"
               style={{
-                backgroundImage: `url('https://radarlampung.disway.id/upload/891504aea3381619b7bbf4670f20b785.jpg')`,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-                height: '600px', // Tinggi tetap diukur dalam px
-                position: 'relative',
+                position: 'absolute',
+                transform: 'translate(-50%, -50%)',
               }}
+              left="50%"
+              top="50%"
             >
-              <div
-                style={{
-                  backgroundColor: 'rgba(0, 0, 0, 0.3)',
-                  position: 'absolute',
-                  top: 0,
-                  left: 0,
-                  width: '100%',
-                  height: '100%',
-                }}
-                borderRadius="md"
-              ></div>
-              <Flex
-                alignItems="center"
-                justifyContent="center"
-                h="100%"
-                color="white"
-                textAlign="center"
-                flexDirection="column"
-                borderRadius="md"
-              >
-                <Heading as="h1" size="2xl" mb={4}>
-                  {' '}
-                  {/* Ukuran font tetap diatur dalam Chakra UI */}
-                  Welcome to Our Product Catalog
-                </Heading>
-                <Text fontSize="lg">
-                  Explore our latest and greatest products.
-                </Text>
-              </Flex>
-            </div>
+              <Heading as="h1" size="2xl" mb={4}>
+                Welcome to Our Product Catalog
+              </Heading>
+              <Text fontSize="lg">
+                Explore our latest and greatest products.
+              </Text>
+            </Flex>
+          </div>
 
-            <Heading as="h2" size="lg" mt={8} mb={4} textAlign="center">
-              Choose The Best Everyday Wear
-            </Heading>
+          <Heading as="h2" size="lg" mt={8} mb={4} textAlign="center">
+            Choose The Best Everyday Wear
+          </Heading>
 
-            <Grid
-              templateColumns="repeat(3, 1fr)" // Menampilkan maksimal 3 kartu dalam satu baris
-              gap={4}
-              justifyContent="center"
-              alignItems="center"
-              pb={10}
-              css={{
-                '@media (max-width: 1280px)': {
-                  gridTemplateColumns: 'repeat(2, 1fr)',
-                },
-                '@media (max-width: 768px)': {
-                  gridTemplateColumns: 'repeat(1, 1fr)',
-                },
-              }}
-            >
-              {products.map(product => (
-                <GridItem
-                  key={product.id}
-                  maxW="100%"
-                  maxH="100%"
-                  pt={5}
-                  px={2}
+          <Grid
+            templateColumns="repeat(3, 1fr)"
+            gap={10}
+            justifyContent="center"
+            alignItems="center"
+            pb={10}
+            ps={20}
+            pe={20}
+            pt={10}
+            css={{
+              '@media (max-width: 1280px)': {
+                gridTemplateColumns: 'repeat(2, 1fr)',
+              },
+              '@media (max-width: 768px)': {
+                gridTemplateColumns: 'repeat(1, 1fr)',
+              },
+            }}
+          >
+            {products.map(product => (
+              <GridItem key={product.id} maxW="100%" maxH="100%" pt={5} px={2}>
+                <Card
+                  borderRadius="md"
+                  transition="transform 0.2s"
+                  _hover={{ transform: 'scale(1.05)' }}
+                  boxShadow="lg"
+                  width="100%"
+                  height="100%"
                 >
-                  <Card
-                    borderRadius="md"
-                    transition="transform 0.2s"
-                    _hover={{ transform: 'scale(1.05)' }}
-                    boxShadow="lg"
-                    width="100%"
-                    height="100%"
+                  <Box
+                    flex="1"
+                    display="flex"
+                    alignItems="center"
+                    justifyContent="center"
                   >
-                    <Box
-                      flex="1"
-                      display="flex"
-                      alignItems="center"
-                      justifyContent="center"
-                    >
-                      <Image
-                        src={product.image}
-                        alt={product.name}
-                        maxW="350px"
-                        maxH="350px"
-                        width="100%"
-                        height="auto"
-                        borderRadius={10}
-                      />
-                    </Box>
-                    <Stack p={4} spacing={2} textAlign="left">
-                      <Text fontSize="xl" fontWeight="bold">
-                        {product.name}
-                      </Text>
-                      <Text fontSize="md">{product.description}</Text>
-                      <Text fontSize="lg" fontWeight="bold" color="red">
-                        {product.price}
-                      </Text>
-                    </Stack>
-                  </Card>
-                </GridItem>
-              ))}
-            </Grid>
-          </Container>
+                    <Image
+                      src={product.image}
+                      alt={product.name}
+                      maxW="350px"
+                      maxH="350px"
+                      width="100%"
+                      height="auto"
+                      borderRadius={10}
+                    />
+                  </Box>
+                  <Stack p={4} spacing={2} textAlign="left">
+                    <Text fontSize="xl" fontWeight="bold">
+                      {product.name}
+                    </Text>
+                    <Text fontSize="md">{product.description}</Text>
+                    <Text fontSize="lg" fontWeight="bold" color="red">
+                      {product.price}
+                    </Text>
+                  </Stack>
+                </Card>
+              </GridItem>
+            ))}
+          </Grid>
         </div>
-        <div>
-          {scrollingUp && (
-            <Button
-              onClick={handleScrollToTop}
-              className={`scroll-button ${scrollingUp ? 'hidden' : ''}`}
-              right="20px"
-              bottom="20px"
-              position="fixed"
-              zIndex="999"
-              colorScheme="red"
-              size="lg"
-            >
-              <ChevronUpIcon />
-              Scroll to Top
-            </Button>
-          )}
-        </div>
-      </Box>
+      </div>
+      <div>
+        {scrollingUp && (
+          <Button
+            onClick={handleScrollToTop}
+            className={`scroll-button ${scrollingUp ? 'hidden' : ''}`}
+            right="20px"
+            bottom="20px"
+            position="fixed"
+            zIndex="999"
+            colorScheme="red"
+            size="lg"
+          >
+            <ChevronUpIcon />
+            {/* Scroll to Top */}
+          </Button>
+        )}
+      </div>
+      {/* </Box> */}
       <Footer />
     </ChakraProvider>
   );
