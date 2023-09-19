@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+
 import {
   ChakraProvider,
   Box,
@@ -11,15 +12,14 @@ import {
   Spacer,
   Link,
   extendTheme,
-  CSSReset,
   Grid,
   GridItem,
   Image,
   Card,
   Stack,
+  Button,
 } from '@chakra-ui/react';
-import { Carousel } from 'react-responsive-carousel';
-import 'react-responsive-carousel/lib/styles/carousel.min.css';
+import { ChevronUpIcon } from '@chakra-ui/icons';
 
 const theme = extendTheme({
   fonts: {
@@ -33,7 +33,7 @@ const theme = extendTheme({
       200: '#ee9a9a',
       300: '#e86d6d',
       400: '#e24141',
-      500: '#db1414', // Warna Utama Merah
+      500: '#db1414',
       600: '#c91414',
       700: '#ac1313',
       800: '#900f0f',
@@ -122,15 +122,30 @@ function Header() {
     <Box bg="white" p={4} color="black" boxShadow="md">
       <Container maxW="container.lg">
         <Flex alignItems="center">
-          <Heading color="red" fontSize="xl">
+          <Image
+            src="https://upload.wikimedia.org/wikipedia/id/thumb/c/c4/Telkom_Indonesia_2013.svg/1200px-Telkom_Indonesia_2013.svg.png"
+            alt="Logo Toko"
+            width={{ base: '6em', md: '9em' }}
+            mr={{ base: '1em', md: '2em' }} // Margin on mobile
+          />
+          <Heading color="red" fontSize={{ base: 'lg', md: 'xl' }} ml={2}>
             Nama Toko Anda
           </Heading>
           <Spacer />
-          <HStack spacing={4}>
-            <Link href="#">Beranda</Link>
-            <Link href="#">Produk</Link>
-            <Link href="#">Tentang Kami</Link>
-            <Link href="#">Kontak</Link>
+          <HStack spacing={{ base: 0, md: 4 }}>
+            {/* Show only a few links on mobile */}
+            <Link display={{ base: 'none', md: 'block' }} href="#">
+              Beranda
+            </Link>
+            <Link display={{ base: 'none', md: 'block' }} href="#">
+              Produk
+            </Link>
+            <Link display={{ base: 'none', md: 'block' }} href="#">
+              Tentang Kami
+            </Link>
+            <Link display={{ base: 'none', md: 'block' }} href="#">
+              Kontak
+            </Link>
           </HStack>
         </Flex>
       </Container>
@@ -140,10 +155,15 @@ function Header() {
 
 function Footer() {
   return (
-    <Box bg="white" p={4} pt={30} color="red">
+    <Box bg="white" p={4} pt={30} color="black">
       <Container maxW="container.lg">
         <VStack spacing={4}>
-          <Text>&copy; 2023 Nama Toko Anda. All rights reserved.</Text>
+          <HStack>
+            <Text color="red" fontWeight="bold">
+              &copy; 2023 Nama Toko Anda.{' '}
+            </Text>{' '}
+            <Text>All rights reserved.</Text>
+          </HStack>
           <HStack spacing={4}>
             <Link href="#">Kebijakan Privasi</Link>
             <Link href="#">Syarat & Ketentuan</Link>
@@ -155,50 +175,76 @@ function Footer() {
 }
 
 function CatalogPage() {
+  const [scrollingUp, setScrollingUp] = useState(false);
+
+  const handleScrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setScrollingUp(true);
+    setTimeout(() => setScrollingUp(false), 1000);
+  };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 100) {
+        setScrollingUp(true);
+      } else {
+        setScrollingUp(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   return (
     <ChakraProvider theme={theme}>
       <Header />
       <Box p={10} bg="#f5f5f5" pb={20}>
         <div>
           <Container maxW="80%" bg="white" borderRadius="md">
-            <div maxW="100%" borderRadius="md">
+            <div
+              maxW="100%"
+              borderRadius="md"
+              style={{
+                backgroundImage: `url('https://radarlampung.disway.id/upload/891504aea3381619b7bbf4670f20b785.jpg')`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                height: '600px', // Tinggi tetap diukur dalam px
+                position: 'relative',
+              }}
+            >
               <div
                 style={{
-                  backgroundImage: `url('https://radarlampung.disway.id/upload/891504aea3381619b7bbf4670f20b785.jpg')`,
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center',
-                  height: '600px',
-                  position: 'relative',
+                  backgroundColor: 'rgba(0, 0, 0, 0.3)',
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  width: '100%',
+                  height: '100%',
                 }}
+                borderRadius="md"
+              ></div>
+              <Flex
+                alignItems="center"
+                justifyContent="center"
+                h="100%"
+                color="white"
+                textAlign="center"
+                flexDirection="column"
+                borderRadius="md"
               >
-                <div
-                  style={{
-                    backgroundColor: 'rgba(0, 0, 0, 0.3)',
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    width: '100%',
-                    height: '100%',
-                  }}
-                  borderRadius="md"
-                ></div>
-                <Flex
-                  alignItems="center"
-                  justifyContent="center"
-                  h="100%"
-                  color="white"
-                  textAlign="center"
-                  flexDirection="column"
-                  borderRadius="md"
-                >
-                  <Heading as="h1" size="xl" mb={4}>
-                    Welcome to Our Product Catalog
-                  </Heading>
-                  <Text fontSize="lg">
-                    Explore our latest and greatest products.
-                  </Text>
-                </Flex>
-              </div>
+                <Heading as="h1" size="2xl" mb={4}>
+                  {' '}
+                  {/* Ukuran font tetap diatur dalam Chakra UI */}
+                  Welcome to Our Product Catalog
+                </Heading>
+                <Text fontSize="lg">
+                  Explore our latest and greatest products.
+                </Text>
+              </Flex>
             </div>
 
             <Heading as="h2" size="lg" mt={8} mb={4} textAlign="center">
@@ -206,11 +252,19 @@ function CatalogPage() {
             </Heading>
 
             <Grid
-              templateColumns="repeat(auto-fill, minmax(17em, 1fr))"
+              templateColumns="repeat(3, 1fr)" // Menampilkan maksimal 3 kartu dalam satu baris
               gap={4}
               justifyContent="center"
               alignItems="center"
               pb={10}
+              css={{
+                '@media (max-width: 1280px)': {
+                  gridTemplateColumns: 'repeat(2, 1fr)',
+                },
+                '@media (max-width: 768px)': {
+                  gridTemplateColumns: 'repeat(1, 1fr)',
+                },
+              }}
             >
               {products.map(product => (
                 <GridItem
@@ -227,7 +281,6 @@ function CatalogPage() {
                     boxShadow="lg"
                     width="100%"
                     height="100%"
-                    p={5}
                   >
                     <Box
                       flex="1"
@@ -259,6 +312,23 @@ function CatalogPage() {
               ))}
             </Grid>
           </Container>
+        </div>
+        <div>
+          {scrollingUp && (
+            <Button
+              onClick={handleScrollToTop}
+              className={`scroll-button ${scrollingUp ? 'hidden' : ''}`}
+              right="20px"
+              bottom="20px"
+              position="fixed"
+              zIndex="999"
+              colorScheme="red"
+              size="lg"
+            >
+              <ChevronUpIcon />
+              Scroll to Top
+            </Button>
+          )}
         </div>
       </Box>
       <Footer />
