@@ -47,74 +47,77 @@ const theme = extendTheme({
 const products = [
   {
     id: 1,
-    name: 'Produk 1',
-    description: 'Deskripsi Produk 1',
-    image:
-      'https://radarlampung.disway.id/upload/891504aea3381619b7bbf4670f20b785.jpg',
+    name: 'Women Hot Collection',
+    description:
+      'In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface ',
+
+    image: 'https://wpthemesgrid.com/themes/free/eshop/images/products/p2.jpg',
     price: 'Rp 100.000',
   },
   {
     id: 2,
-    name: 'Produk 2',
-    description: 'Deskripsi Produk 2',
-    image:
-      'https://radarlampung.disway.id/upload/891504aea3381619b7bbf4670f20b785.jpg',
+    name: 'Awesome Pink Show',
+    description:
+      'In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface In  ',
+
+    image: 'https://wpthemesgrid.com/themes/free/eshop/images/products/p4.jpg',
     price: 'Rp 150.000',
   },
   {
     id: 3,
-    name: 'Produk 3',
-    description: 'Deskripsi Produk 3',
-    image:
-      'https://radarlampung.disway.id/upload/891504aea3381619b7bbf4670f20b785.jpg',
+    name: 'Awesome Bags Collection',
+    description:
+      'In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface In  ',
+
+    image: 'https://wpthemesgrid.com/themes/free/eshop/images/products/p6.jpg',
     price: 'Rp 120.000',
   },
   {
     id: 4,
-    name: 'Produk 4',
-    description: 'Deskripsi Produk 4',
-    image:
-      'https://radarlampung.disway.id/upload/891504aea3381619b7bbf4670f20b785.jpg',
+    name: 'Women Pant Collectons',
+    description:
+      'In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface In  ',
+    image: 'https://wpthemesgrid.com/themes/free/eshop/images/products/p8.jpg',
     price: 'Rp 120.000',
   },
   {
     id: 5,
-    name: 'Produk 5',
-    description: 'Deskripsi Produk 5',
-    image:
-      'https://radarlampung.disway.id/upload/891504aea3381619b7bbf4670f20b785.jpg',
+    name: 'Awesome Bags Collection',
+    description:
+      'In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface In  ',
+    image: 'https://wpthemesgrid.com/themes/free/eshop/images/products/p10.jpg',
     price: 'Rp 120.000',
   },
   {
     id: 6,
-    name: 'Produk 6',
-    description: 'Deskripsi Produk 6',
-    image:
-      'https://radarlampung.disway.id/upload/891504aea3381619b7bbf4670f20b785.jpg',
+    name: 'Awesome Cap For Women',
+    description:
+      'In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface In  ',
+    image: 'https://wpthemesgrid.com/themes/free/eshop/images/products/p12.jpg',
     price: 'Rp 120.000',
   },
   {
     id: 7,
-    name: 'Produk 7',
-    description: 'Deskripsi Produk 7',
-    image:
-      'https://radarlampung.disway.id/upload/891504aea3381619b7bbf4670f20b785.jpg',
+    name: 'Polo Dress For Women',
+    description:
+      'In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface In  ',
+    image: 'https://wpthemesgrid.com/themes/free/eshop/images/products/p14.jpg',
     price: 'Rp 120.000',
   },
   {
     id: 8,
-    name: 'Produk 8',
-    description: 'Deskripsi Produk 8',
-    image:
-      'https://radarlampung.disway.id/upload/891504aea3381619b7bbf4670f20b785.jpg',
+    name: 'Black Sunglass For Women',
+    description:
+      'In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface In  ',
+    image: 'https://wpthemesgrid.com/themes/free/eshop/images/products/p16.jpg',
     price: 'Rp 120.000',
   },
   {
     id: 9,
-    name: 'Produk 9',
-    description: 'Deskripsi Produk 9',
-    image:
-      'https://radarlampung.disway.id/upload/891504aea3381619b7bbf4670f20b785.jpg',
+    name: 'Red Bag',
+    description:
+      'In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface In  ',
+    image: 'https://wpthemesgrid.com/themes/free/eshop/images/mini-banner2.jpg',
     price: 'Rp 120.000',
   },
 ];
@@ -257,6 +260,12 @@ function CatalogPage() {
     };
   }, []);
 
+  const [selectedButton, setSelectedButton] = useState(null);
+
+  const handleButtonClick = buttonId => {
+    setSelectedButton(buttonId);
+  };
+
   return (
     <ChakraProvider theme={theme}>
       <Header />
@@ -266,10 +275,10 @@ function CatalogPage() {
             maxW="100%"
             borderRadius="md"
             style={{
-              backgroundImage: `url('https://radarlampung.disway.id/upload/891504aea3381619b7bbf4670f20b785.jpg')`,
+              backgroundImage: `url('https://img.freepik.com/free-vector/new-season-banner-template-with-splash_1361-1527.jpg?w=2000')`,
               backgroundSize: 'cover',
               backgroundPosition: 'center',
-              height: '600px',
+              height: '50em',
               position: 'relative',
             }}
           >
@@ -312,6 +321,47 @@ function CatalogPage() {
             Choose The Best Everyday Wear
           </Heading>
 
+          <HStack
+            p={7}
+            pt={10}
+            justifyContent="center"
+            alignItems="center"
+            gap={6}
+          >
+            <Button
+              color={selectedButton === 1 ? 'white' : 'black'}
+              shadow="md"
+              colorScheme={selectedButton === 1 ? 'red' : 'white'}
+              onClick={() => handleButtonClick(1)}
+            >
+              Man
+            </Button>
+            <Button
+              color={selectedButton === 2 ? 'white' : 'black'}
+              shadow="md"
+              colorScheme={selectedButton === 2 ? 'red' : 'white'}
+              onClick={() => handleButtonClick(2)}
+            >
+              Woman
+            </Button>
+            <Button
+              color={selectedButton === 3 ? 'white' : 'black'}
+              shadow="md"
+              colorScheme={selectedButton === 3 ? 'red' : 'white'}
+              onClick={() => handleButtonClick(3)}
+            >
+              Kids
+            </Button>
+            <Button
+              color={selectedButton === 4 ? 'white' : 'black'}
+              shadow="md"
+              colorScheme={selectedButton === 4 ? 'red' : 'white'}
+              onClick={() => handleButtonClick(4)}
+            >
+              Accesorries
+            </Button>
+          </HStack>
+
           <Grid
             templateColumns="repeat(3, 1fr)"
             gap={10}
@@ -352,18 +402,35 @@ function CatalogPage() {
                       maxW="350px"
                       maxH="350px"
                       width="100%"
-                      height="auto"
+                      height="350px"
                       borderRadius={10}
                     />
                   </Box>
-                  <Stack p={4} spacing={2} textAlign="left">
+                  <Stack p={5} spacing={2} textAlign="left">
                     <Text fontSize="xl" fontWeight="bold">
                       {product.name}
                     </Text>
-                    <Text fontSize="md">{product.description}</Text>
-                    <Text fontSize="lg" fontWeight="bold" color="red">
-                      {product.price}
+                    <Text
+                      fontSize="md"
+                      style={{
+                        fontSize: 'md',
+                        height: '75px',
+                        width: '100%',
+                        overflow: 'hidden',
+                        // whiteSpace: 'nowrap',
+                      }}
+                    >
+                      {product.description}
                     </Text>
+                    <HStack pt={3}>
+                      <Text fontSize="lg" fontWeight="bold" color="red">
+                        {product.price}
+                      </Text>
+                      <Spacer />
+                      <Text fontSize="md" fontWeight="bold" color="red">
+                        See Details
+                      </Text>
+                    </HStack>
                   </Stack>
                 </Card>
               </GridItem>
@@ -384,11 +451,10 @@ function CatalogPage() {
             size="lg"
           >
             <ChevronUpIcon />
-            {/* Scroll to Top */}
           </Button>
         )}
       </div>
-      {/* </Box> */}
+
       <Footer />
     </ChakraProvider>
   );
