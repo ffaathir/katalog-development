@@ -128,9 +128,9 @@ function Header() {
             width={{ base: '6em', md: '9em' }}
             mr={{ base: '1em', md: '2em' }} // Margin on mobile
           />
-          <Heading color="red" fontSize={{ base: 'lg', md: 'xl' }} ml={2}>
+          {/* <Heading color="red" fontSize={{ base: 'lg', md: 'xl' }} ml={2}>
             Nama Toko Anda
-          </Heading>
+          </Heading> */}
           <Spacer />
           <HStack spacing={{ base: 0, md: 4 }}>
             {/* Show only a few links on mobile */}
@@ -303,7 +303,7 @@ function CatalogPage() {
                         {product.name}
                       </Text>
                       <Text fontSize="md">{product.description}</Text>
-                      <Text fontSize="lg" fontWeight="bold">
+                      <Text fontSize="lg" fontWeight="bold" color="red">
                         {product.price}
                       </Text>
                     </Stack>
