@@ -19,9 +19,16 @@ import {
   Stack,
   Button,
   Collapse,
+  useMediaQuery,
 } from '@chakra-ui/react';
 import { ChevronUpIcon } from '@chakra-ui/icons';
-import { FaSignInAlt, FaUserPlus } from 'react-icons/fa';
+import {
+  FaSignInAlt,
+  FaUserPlus,
+  FaFacebook,
+  FaTwitter,
+  FaInstagram,
+} from 'react-icons/fa';
 
 const theme = extendTheme({
   fonts: {
@@ -228,7 +235,24 @@ function Footer() {
             />
             <Text color="black" fontWeight="bold">
               "Toko Laris, Pilihan Terbaik!"
-            </Text>{' '}
+            </Text>
+            <HStack gap={5} pt={5}>
+              <Button
+                size="sm"
+                colorScheme="red"
+                leftIcon={<FaFacebook />}
+              ></Button>
+              <Button
+                size="sm"
+                colorScheme="red"
+                leftIcon={<FaTwitter />}
+              ></Button>
+              <Button
+                size="sm"
+                colorScheme="red"
+                leftIcon={<FaInstagram />}
+              ></Button>
+            </HStack>
           </VStack>
           <HStack spacing={4} pt={5}>
             <Text color="red" fontWeight="bold">
@@ -276,6 +300,7 @@ function CatalogPage() {
   const handleButtonClick = buttonId => {
     setSelectedButton(buttonId);
   };
+  const [isMobile] = useMediaQuery('(max-width: 600px)');
 
   return (
     <ChakraProvider theme={theme}>
@@ -289,7 +314,7 @@ function CatalogPage() {
               backgroundImage: `url('https://img.freepik.com/free-vector/new-season-banner-template-with-splash_1361-1527.jpg?w=2000')`,
               backgroundSize: 'cover',
               backgroundPosition: 'center',
-              height: '50em',
+              height: isMobile ? '30em' : '50em',
               position: 'relative',
             }}
           >
@@ -328,67 +353,77 @@ function CatalogPage() {
             </Flex>
           </div>
           <HStack
-            // pb={10}
             ps={20}
             pe={20}
             justifyContent="space-between"
             alignItems="center"
             gap={6}
-            // border={1}
-            borderColor="red" // Menentukan warna border merah
-            borderWidth={1} // Menentukan lebar border
+            borderColor="red"
+            borderWidth={1}
           >
-            <div>
+            <HStack mt="4" mb="4">
               <Heading
                 as="h2"
                 size="lg"
-                mt={8}
-                mb={4}
+                fontWeight="600"
                 textAlign="start"
                 color="red"
               >
                 Toko Laris
               </Heading>
-            </div>
-            <HStack
+            </HStack>
+            <Box
+              display={{ base: 'block', md: 'flex' }}
               justifyContent="center"
               alignItems="center"
-              gap={6}
               border={1}
+              p={2}
+              mt="4"
+              mb="4"
+              borderRadius="md"
             >
-              <Button
-                color={selectedButton === 1 ? 'white' : 'black'}
-                shadow="md"
-                colorScheme={selectedButton === 1 ? 'red' : 'white'}
-                onClick={() => handleButtonClick(1)}
-              >
-                Man
-              </Button>
-              <Button
-                color={selectedButton === 2 ? 'white' : 'black'}
-                shadow="md"
-                colorScheme={selectedButton === 2 ? 'red' : 'white'}
-                onClick={() => handleButtonClick(2)}
-              >
-                Woman
-              </Button>
-              <Button
-                color={selectedButton === 3 ? 'white' : 'black'}
-                shadow="md"
-                colorScheme={selectedButton === 3 ? 'red' : 'white'}
-                onClick={() => handleButtonClick(3)}
-              >
-                Kids
-              </Button>
-              <Button
-                color={selectedButton === 4 ? 'white' : 'black'}
-                shadow="md"
-                colorScheme={selectedButton === 4 ? 'red' : 'white'}
-                onClick={() => handleButtonClick(4)}
-              >
-                Accesorries
-              </Button>
-            </HStack>
+              <Stack direction={{ base: 'column', md: 'row' }} spacing={2}>
+                <Button
+                  flex="1"
+                  color={selectedButton === 1 ? 'white' : 'black'}
+                  shadow="md"
+                  colorScheme={selectedButton === 1 ? 'red' : 'white'}
+                  onClick={() => handleButtonClick(1)}
+                >
+                  Man
+                </Button>
+                <Button
+                  flex="1"
+                  color={selectedButton === 2 ? 'white' : 'black'}
+                  shadow="md"
+                  colorScheme={selectedButton === 2 ? 'red' : 'white'}
+                  onClick={() => handleButtonClick(2)}
+                >
+                  Woman
+                </Button>
+              </Stack>
+              <Spacer display={{ base: 'none', md: 'block' }} />
+              <Stack direction={{ base: 'column', md: 'row' }} spacing={2}>
+                <Button
+                  flex="1"
+                  color={selectedButton === 3 ? 'white' : 'black'}
+                  shadow="md"
+                  colorScheme={selectedButton === 3 ? 'red' : 'white'}
+                  onClick={() => handleButtonClick(3)}
+                >
+                  Kids
+                </Button>
+                <Button
+                  flex="1"
+                  color={selectedButton === 4 ? 'white' : 'black'}
+                  shadow="md"
+                  colorScheme={selectedButton === 4 ? 'red' : 'white'}
+                  onClick={() => handleButtonClick(4)}
+                >
+                  Accessories
+                </Button>
+              </Stack>
+            </Box>
           </HStack>
 
           <Heading as="h2" size="lg" mt={8} mb={4} pt={10} textAlign="center">
@@ -405,7 +440,7 @@ function CatalogPage() {
             pe={20}
             pt={10}
             css={{
-              '@media (max-width: 1280px)': {
+              '@media (max-width: 1000px)': {
                 gridTemplateColumns: 'repeat(2, 1fr)',
               },
               '@media (max-width: 768px)': {
