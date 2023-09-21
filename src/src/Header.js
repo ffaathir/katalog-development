@@ -12,11 +12,10 @@ import {
   Collapse,
 } from '@chakra-ui/react';
 import { Link as ChakraLink } from '@chakra-ui/react';
-import { Link as RouterLink, useLocation } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 function Header() {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const location = useLocation();
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!isMobileMenuOpen);
@@ -34,23 +33,25 @@ function Header() {
           />
           <Spacer />
           <HStack spacing={{ base: 0, md: 4 }}>
-            <RouterLink
+            <NavLink
               to="/"
+              as={ChakraLink}
               display={{ base: 'none', md: 'block' }}
               href="#"
-              color={location.pathname === '/' ? 'red' : 'initial'}
-              fontWeight="bold"
+              exact
+              activeStyle={{ color: 'red', fontWeight: 'bold' }}
             >
               Beranda
-            </RouterLink>
-            <RouterLink
+            </NavLink>
+            <NavLink
               to="/form"
+              as={ChakraLink}
               display={{ base: 'none', md: 'block' }}
               href="#"
-              color={location.pathname === '/form' ? 'red' : 'initial'}
+              activeStyle={{ color: 'red', fontWeight: 'bold' }}
             >
               Produk
-            </RouterLink>
+            </NavLink>
             <ChakraLink display={{ base: 'none', md: 'block' }} href="#">
               Tentang Kami
             </ChakraLink>
