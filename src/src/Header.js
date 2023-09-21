@@ -12,10 +12,11 @@ import {
   Collapse,
 } from '@chakra-ui/react';
 import { Link as ChakraLink } from '@chakra-ui/react';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useLocation } from 'react-router-dom';
 
 function Header() {
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const location = useLocation();
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!isMobileMenuOpen);
@@ -33,18 +34,20 @@ function Header() {
           />
           <Spacer />
           <HStack spacing={{ base: 0, md: 4 }}>
-            <ChakraLink
+            <RouterLink
+              to="/"
               display={{ base: 'none', md: 'block' }}
               href="#"
-              color="red"
+              color={location.pathname === '/' ? 'red' : 'initial'}
               fontWeight="bold"
             >
               Beranda
-            </ChakraLink>
+            </RouterLink>
             <RouterLink
               to="/form"
               display={{ base: 'none', md: 'block' }}
               href="#"
+              color={location.pathname === '/form' ? 'red' : 'initial'}
             >
               Produk
             </RouterLink>
@@ -109,4 +112,5 @@ function Header() {
     </Box>
   );
 }
+
 export default Header;
