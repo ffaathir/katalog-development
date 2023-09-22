@@ -25,28 +25,27 @@ function CatalogPage() {
   const [data, setData] = useState(null);
   const [isMobile] = useMediaQuery('(max-width: 600px)');
 
-  const url = 'https://staging-qore-data-carpet-433625.qore.dev/v1/execute';
-  const headers = {
-    'x-qore-engine-admin-secret': 'VQd2Y6V1iUOfNLqNTL7EY9bFg5TgCjus',
-  };
-  const body = {
-    operations: [
-      {
-        operation: 'Select',
-        instruction: {
-          name: 'data',
-          orderBy: { id: 'ASC' },
-          condition: {},
-          limit: 26,
-          offset: 0,
-          params: {},
-          table: 'katalog',
-        },
-      },
-    ],
-  };
-
   useEffect(() => {
+    const url = 'https://staging-qore-data-carpet-433625.qore.dev/v1/execute';
+    const headers = {
+      'x-qore-engine-admin-secret': 'VQd2Y6V1iUOfNLqNTL7EY9bFg5TgCjus',
+    };
+    const body = {
+      operations: [
+        {
+          operation: 'Select',
+          instruction: {
+            name: 'data',
+            orderBy: { id: 'ASC' },
+            condition: {},
+            limit: 26,
+            offset: 0,
+            params: {},
+            table: 'katalog',
+          },
+        },
+      ],
+    };
     axios
       .post(url, body, { headers })
       .then(response => {
@@ -55,7 +54,7 @@ function CatalogPage() {
       .catch(error => {
         console.error('Error:', error);
       });
-  });
+  }, []);
 
   const handleScrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -77,7 +76,7 @@ function CatalogPage() {
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  });
+  }, [setScrollingUp]);
 
   if (!data) {
     return <div>Loading...</div>;
