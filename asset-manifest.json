@@ -1,0 +1,12 @@
+{
+  "files": {
+    "main.js": "/katalog-development/static/js/main.e010cef5.js",
+    "static/js/787.28cb0dcd.chunk.js": "/katalog-development/static/js/787.28cb0dcd.chunk.js",
+    "index.html": "/katalog-development/index.html",
+    "main.e010cef5.js.map": "/katalog-development/static/js/main.e010cef5.js.map",
+    "787.28cb0dcd.chunk.js.map": "/katalog-development/static/js/787.28cb0dcd.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.e010cef5.js"
+  ]
+}
